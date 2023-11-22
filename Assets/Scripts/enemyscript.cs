@@ -111,7 +111,10 @@ public class EnemyScript : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
         //if (health <= 0) Invoke(nameof(DestroyEnemy), .5f);
     }
 
@@ -167,6 +170,11 @@ public class EnemyScript : MonoBehaviour
                 alreadyAttacked = true;
                 Invoke(nameof(ResetAttack), timeBetweenAttacks);
             }
+        }
+
+        if(other.gameObject.CompareTag("Bullet"))
+        {
+            TakeDamage(2);
         }
     }
 

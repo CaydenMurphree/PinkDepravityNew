@@ -6,6 +6,7 @@ TagManager:
   tags:
   - objectToSpawn
   - Enemy
+  - Bullet
   layers:
   - Default
   - TransparentFX
