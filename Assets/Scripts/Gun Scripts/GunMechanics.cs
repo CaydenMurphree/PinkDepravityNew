@@ -22,7 +22,14 @@ public class GunMechanics : MonoBehaviour
     [SerializeField]
     public float positionLerpSpeed = 20f; 
     [SerializeField]
-    public float rotationLerpSpeed = 20f; 
+    public float rotationLerpSpeed = 20f;
+
+    AudioSource shootingSound;
+
+    private void Start()
+    {
+        shootingSound = GetComponent<AudioSource>();
+    }
 
     void Update()
     {
@@ -56,6 +63,7 @@ public class GunMechanics : MonoBehaviour
                 Vector3 targetPosition = hit.point;
 
                 GameObject bullet = Instantiate(BulletPrefab, BulletHolder.transform.position, transform.rotation);
+                shootingSound.Play();
 
                 Vector3 shootingDirection = (targetPosition - BulletHolder.transform.position).normalized;
 
