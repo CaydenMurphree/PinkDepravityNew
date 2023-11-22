@@ -16,13 +16,12 @@ public class BulletCollisions : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider collider)
+    private void OntriggerEnter(Collider collider)
     {
         if (collider.gameObject.tag == "Enemy")
         {
 
             Destroy(gameObject);
-            
         }
     }
 }
