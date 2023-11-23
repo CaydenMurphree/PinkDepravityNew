@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GunMechanics : MonoBehaviour
 {
@@ -24,11 +25,25 @@ public class GunMechanics : MonoBehaviour
     [SerializeField]
     public float rotationLerpSpeed = 20f;
 
+    [SerializeField]
     AudioSource shootingSound;
+    [SerializeField]
+    AudioSource noAmmoSound;
+    [SerializeField]
+    AudioSource reloadingSound;
+    [SerializeField]
+    private int ammo;
+    public int maxAmmo = 30;
+    [SerializeField]
+    public Text ammoText;
+
+    
 
     private void Start()
     {
-        shootingSound = GetComponent<AudioSource>();
+      
+
+        ammo = maxAmmo;
     }
 
     void Update()
@@ -41,6 +56,15 @@ public class GunMechanics : MonoBehaviour
         else if (Input.GetMouseButtonUp(0))
         {
             isShooting = false;
+        }
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            reloadingSound.Play();
+            ammo = maxAmmo;
+            ammoText.text = ammo.ToString();
+            ammoText.color = new Color(0x38 / 255f, 0x17 / 255f, 0xD4 / 255f);
+
         }
 
 
@@ -58,21 +82,50 @@ public class GunMechanics : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
+
             if (Physics.Raycast(ray, out hit))
             {
-                Vector3 targetPosition = hit.point;
+                if (ammo <= 0)
+                {
+                    noAmmoSound.Play();
+                }
+                else
+                {
+                    Vector3 targetPosition = hit.point;
 
-                GameObject bullet = Instantiate(BulletPrefab, BulletHolder.transform.position, transform.rotation);
-                shootingSound.Play();
+                    GameObject bullet = Instantiate(BulletPrefab, BulletHolder.transform.position, transform.rotation);
+                    shootingSound.Play();
+                    ammo--;
+                    UpdateAmmoText(ammo);
+                    Vector3 shootingDirection = (targetPosition - BulletHolder.transform.position).normalized;
 
-                Vector3 shootingDirection = (targetPosition - BulletHolder.transform.position).normalized;
+                    bullet.GetComponent<Rigidbody>().AddForce(shootingDirection * BulletSpeed);
 
-                bullet.GetComponent<Rigidbody>().AddForce(shootingDirection * BulletSpeed);
-
-                Destroy(bullet, RemoveBulletInterval);
+                    Destroy(bullet, RemoveBulletInterval);
+                }
             }
+            
+            
 
             yield return new WaitForSeconds(BulletSpawnInterval);
+        }
+    }
+
+    private void UpdateAmmoText(int a)
+    {
+        if(a > 10)
+        {
+            ammoText.text = a.ToString();
+        }
+        else if(a >0)
+        {
+            ammoText.text = a.ToString();
+            ammoText.color = Color.red;
+        }
+        else
+        {
+            ammoText.text = "RELOAD";
+
         }
     }
 }

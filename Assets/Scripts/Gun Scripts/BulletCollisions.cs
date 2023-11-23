@@ -5,7 +5,6 @@ using UnityEngine;
 public class BulletCollisions : MonoBehaviour
 {
 
-
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.tag == "Enemy")
