@@ -11,7 +11,7 @@ public class GunMechanics : MonoBehaviour
     [SerializeField]
     public float BulletSpeed = 5000;
     public float BulletSpawnInterval = 0.3f;
-    public float RemoveBulletInterval = 2.0f;
+    public float RemoveBulletInterval = 3.0f;
     private bool isShooting = false;
 
     // Offset values to position the gun in relation to the camera
