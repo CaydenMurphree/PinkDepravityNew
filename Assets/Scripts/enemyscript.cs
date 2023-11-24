@@ -133,46 +133,32 @@ public class EnemyScript : MonoBehaviour
 
     }
 
+    void OnCollisionStay(Collision collisionInfo)
+    {
+        // Check if the objects are still in contact
+
+        if (collisionInfo.gameObject.CompareTag("Player"))
+        {
+
+            Debug.Log("Objects are in constant contact");
+
+            if (alreadyAttacked == false)
+            {
+                player.TakeDamage(damageAmount);
+                alreadyAttacked = true;
+                Invoke(nameof(ResetAttack), timeBetweenAttacks);
+            }
+
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
         //Debug.Log("Collision");
         //Debug.Log("Tag of collided object: " + other.gameObject.tag);
 
-        if (other.gameObject.CompareTag("Player"))
-        {
-            Debug.Log("Player hit");
-            if (!alreadyAttacked)
-            {
 
-
-                // Get the Player component
-                //Player player = other.gameObject.GetComponent<Player>();
-                //PlayerCollision playerCollision = other.gameObject.GetComponent<PlayerCollision>();
-
-                if (player != null)
-                {
-                    // Ensure the TakeDamage method exists in the Player script
-
-                    player.TakeDamage(damageAmount);
-
-                    // make the enemy back off
-                    Vector3 backupPoint = transform.position - transform.forward * reverseDistance;
-                    reversing = true;
-
-                    //playerCollision.SetEnemyCollision(true);
-                }
-                else
-                {
-                    //Debug.LogError("Player script not found on the collided object.");
-
-                }
-
-                alreadyAttacked = true;
-                Invoke(nameof(ResetAttack), timeBetweenAttacks);
-            }
-        }
-
-        if(other.gameObject.CompareTag("Bullet"))
+        if (other.gameObject.CompareTag("Bullet"))
         {
             TakeDamage(2);
         }
