@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement; 
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -10,8 +10,13 @@ public class Player : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
 
+    public int maxSanity = 100;
+    public int currentSanity;
+
     // Reference to the Health Bar UI element
     public HealthBar healthBar;
+
+    public HealthBar sanityBar;
 
     // Reference to the game over text UI element
     public GameObject deathDisplay;
@@ -40,6 +45,10 @@ public class Player : MonoBehaviour
 
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+
+        currentSanity = maxSanity;
+        sanityBar.SetMaxHealth(maxSanity);
+
     }
 
     void Update()
