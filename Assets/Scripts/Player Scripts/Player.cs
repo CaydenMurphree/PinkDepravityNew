@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Threading;
 
 public class Player : MonoBehaviour
 {
@@ -48,11 +49,19 @@ public class Player : MonoBehaviour
 
         currentSanity = maxSanity;
         sanityBar.SetMaxHealth(maxSanity);
-
+        StartCoroutine(TimerCoroutine());
     }
 
     void Update()
     {
+
+        if (currentSanity > 100)
+        {
+            currentSanity = 100;
+        }
+
+        sanityBar.SetHealth(currentSanity);
+
         // Dialogue
         if (dialogueBox.activeSelf)
         {
@@ -91,7 +100,7 @@ public class Player : MonoBehaviour
         }
 
         // Check if health is zero or below, and disable movement if necessary
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 || currentSanity <= 0)
         {
             // Disable movement by calling the SetCanMove method in PlayerMovement
             playerMovement.SetCanMove(false);
@@ -110,6 +119,7 @@ public class Player : MonoBehaviour
         currentHealth -= damage;
 
         healthBar.SetHealth(currentHealth);
+        currentSanity -= 10;
     }
 
     public void TakeHealth(int health)
@@ -117,5 +127,23 @@ public class Player : MonoBehaviour
         currentHealth += health;
 
         healthBar.SetHealth(currentHealth);
+        currentSanity += 30;
+    }
+
+    private IEnumerator TimerCoroutine()
+    {
+        Debug.Log("Timer started");
+        yield return new WaitForSeconds(20);
+        TimerCallback();
+    }
+
+    private void TimerCallback()
+    {
+        Debug.Log("Timer ended");
+        // Code to execute when timer elapses
+        currentSanity -= 10;
+        Debug.Log("Current sanity: " + currentSanity);
+
+        StartCoroutine(TimerCoroutine());
     }
 }

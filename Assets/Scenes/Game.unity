@@ -454,7 +454,7 @@ MonoBehaviour:
   damageAmount: 10
   reverseDistance: 10
   walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 30
+  walkPointRange: 15
   timeBetweenAttacks: 5
   sightRange: 10
   attackRange: 2
@@ -3042,7 +3042,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 1079
+    m_Bits: 1047
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 0
@@ -3053,7 +3053,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 7101cbbfa84a4604b92517df58eaedbb, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 33731522e089ea94d869309f62316366, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &1558633718
 Transform:
