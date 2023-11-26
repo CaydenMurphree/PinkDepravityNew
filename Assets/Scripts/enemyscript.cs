@@ -113,6 +113,7 @@ public class EnemyScript : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
+            player.currentSanity += 60;
             Destroy(gameObject);
         }
         //if (health <= 0) Invoke(nameof(DestroyEnemy), .5f);
