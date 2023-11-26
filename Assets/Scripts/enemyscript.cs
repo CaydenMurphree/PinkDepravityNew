@@ -35,6 +35,9 @@ public class EnemyScript : MonoBehaviour
     private GameObject soldier;
     private GameObject horse;
 
+    [SerializeField] AudioSource hitSound;
+    [SerializeField] AudioSource deathSound;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -160,6 +163,7 @@ public class EnemyScript : MonoBehaviour
         if (health <= 0)
         {
             player.currentSanity += 60;
+            deathSound.Play();
             Destroy(gameObject);
         }
         //if (health <= 0) Invoke(nameof(DestroyEnemy), .5f);
@@ -192,6 +196,7 @@ public class EnemyScript : MonoBehaviour
             if (alreadyAttacked == false)
             {
                 player.TakeDamage(damageAmount);
+                hitSound.Play();
                 alreadyAttacked = true;
                 Invoke(nameof(ResetAttack), timeBetweenAttacks);
             }
