@@ -23,4 +23,10 @@ public class HealthBar : MonoBehaviour
 
         fill.color = gradient.Evaluate(slider.normalizedValue);
     }
+
+    //make an method to get health valuse
+    public int GetHealth()
+    {
+        return (int)slider.value;
+    }
 }
