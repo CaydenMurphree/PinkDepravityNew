@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class GunMechanics : MonoBehaviour
 {
-    public Player player;
-
     [SerializeField]
     public GameObject BulletPrefab;
     [SerializeField]
@@ -50,34 +48,32 @@ public class GunMechanics : MonoBehaviour
 
     void Update()
     {
-        if (!player.inventoryActive)
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                isShooting = true;
-                StartCoroutine(ShootBullet());
-            }
-            else if (Input.GetMouseButtonUp(0))
-            {
-                isShooting = false;
-            }
+            isShooting = true;
+            StartCoroutine(ShootBullet());
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            isShooting = false;
+        }
 
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                reloadingSound.Play();
-                ammo = maxAmmo;
-                ammoText.text = ammo.ToString();
-                ammoText.color = new Color(0x38 / 255f, 0x17 / 255f, 0xD4 / 255f);
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            reloadingSound.Play();
+            ammo = maxAmmo;
+            ammoText.text = ammo.ToString();
+            ammoText.color = new Color(0x38 / 255f, 0x17 / 255f, 0xD4 / 255f);
 
-            }
+        }
 
 
-            // Make the gun follow the camera's position and rotation
-            Vector3 targetPosition = Camera.main.transform.position + Camera.main.transform.TransformDirection(gunPositionOffset);
-            Quaternion targetRotation = Camera.main.transform.rotation * Quaternion.Euler(gunRotationOffset);
-            transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * positionLerpSpeed);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationLerpSpeed);
-        }       
+        // Make the gun follow the camera's position and rotation
+        Vector3 targetPosition = Camera.main.transform.position + Camera.main.transform.TransformDirection(gunPositionOffset);
+        Quaternion targetRotation = Camera.main.transform.rotation * Quaternion.Euler(gunRotationOffset);
+        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * positionLerpSpeed);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationLerpSpeed);
+       
     }
 
     IEnumerator ShootBullet()
