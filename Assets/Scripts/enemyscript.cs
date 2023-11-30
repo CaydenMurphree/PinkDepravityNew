@@ -32,8 +32,8 @@ public class EnemyScript : MonoBehaviour
 
     Vector3 backupPoint;
 
-    private GameObject soldier;
-    private GameObject horse;
+    public GameObject soldierSkin;
+    public GameObject horseSkin;
 
     [SerializeField] AudioSource hitSound;
     [SerializeField] AudioSource deathSound;
@@ -72,16 +72,16 @@ public class EnemyScript : MonoBehaviour
 
     private void skinPrep()
     {
-        soldier = GameObject.Find("Soldier_demo");
-        horse = GameObject.Find("Horse3D_Opt_Ver4");
+        //soldierSkin = GameObject.Find("Soldier_demo");
+        //horseSkin = GameObject.Find("Horse3D_Opt_Ver4");
 
-        if (soldier == null)
+        if (soldierSkin == null)
         {
             Debug.LogError("Soldier_demo not found");
             return;
         }
 
-        if (horse == null)
+        if (horseSkin == null)
         {
             Debug.LogError("Horse3D_Opt_Ver4 not found");
             return;
@@ -101,13 +101,13 @@ public class EnemyScript : MonoBehaviour
 
         if (player.currentSanity < 50)
         {
-            soldier.SetActive(true);
-            horse.SetActive(false);
+            soldierSkin.SetActive(true);
+            horseSkin.SetActive(false);
         }
         else
         {
-            soldier.SetActive(false);
-            horse.SetActive(true);
+            soldierSkin.SetActive(false);
+            horseSkin.SetActive(true);
         }
     }
 
