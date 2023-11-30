@@ -33,6 +33,9 @@ public class Player : MonoBehaviour
     // Add a reference to Dialogue Object
     public GameObject dialogueBox;
 
+    [SerializeField]
+    public bool inventoryActive = false;
+
     private void Awake()
     {
         Instance = this;
@@ -77,7 +80,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             // Toggle inventory's active state
-            bool inventoryActive = !inventory.activeSelf;
+            inventoryActive = !inventory.activeSelf;
             inventory.gameObject.SetActive(inventoryActive);
 
             // Toggle cursor visibility and lock state based on the inventory's active state
