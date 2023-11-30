@@ -16,4 +16,14 @@ public class ItemPickup : MonoBehaviour
     {
         Pickup();
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // if name of objrct is bullet bullet
+
+        if (other.gameObject.name == "bullet")
+        {
+            Pickup();
+        }
+    }
 }
