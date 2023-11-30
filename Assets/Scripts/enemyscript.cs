@@ -32,6 +32,12 @@ public class EnemyScript : MonoBehaviour
 
     Vector3 backupPoint;
 
+    private GameObject soldier;
+    private GameObject horse;
+
+    [SerializeField] AudioSource hitSound;
+    [SerializeField] AudioSource deathSound;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -39,6 +45,7 @@ public class EnemyScript : MonoBehaviour
         playerTran = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         agent.radius = 0.1f;
+        skinPrep();
 
     }
 
@@ -59,7 +66,49 @@ public class EnemyScript : MonoBehaviour
             if (playerInSightRange && !playerInAttackRange) ChasePlayer();
             if (playerInAttackRange && playerInSightRange) AttackPlayer();
         }
+        selectSkin();
 
+    }
+
+    private void skinPrep()
+    {
+        soldier = GameObject.Find("Soldier_demo");
+        horse = GameObject.Find("Horse3D_Opt_Ver4");
+
+        if (soldier == null)
+        {
+            Debug.LogError("Soldier_demo not found");
+            return;
+        }
+
+        if (horse == null)
+        {
+            Debug.LogError("Horse3D_Opt_Ver4 not found");
+            return;
+        }
+
+        if (player == null)
+        {
+            Debug.LogError("Player not found");
+            return;
+        }
+
+
+    }
+
+    private void selectSkin()
+    {
+
+        if (player.currentSanity < 50)
+        {
+            soldier.SetActive(true);
+            horse.SetActive(false);
+        }
+        else
+        {
+            soldier.SetActive(false);
+            horse.SetActive(true);
+        }
     }
 
     private void Patroling()
@@ -113,6 +162,8 @@ public class EnemyScript : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
+            player.currentSanity += 60;
+            deathSound.Play();
             Destroy(gameObject);
         }
         //if (health <= 0) Invoke(nameof(DestroyEnemy), .5f);
@@ -145,6 +196,7 @@ public class EnemyScript : MonoBehaviour
             if (alreadyAttacked == false)
             {
                 player.TakeDamage(damageAmount);
+                hitSound.Play();
                 alreadyAttacked = true;
                 Invoke(nameof(ResetAttack), timeBetweenAttacks);
             }
