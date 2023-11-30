@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Apple
   m_EditorClassIdentifier: 
   id: 4
-  itemName: Apple
+  itemName: Candy Apple
   value: 5
   icon: {fileID: 21300000, guid: ff94084f6a5577b4cb705e4db7258940, type: 3}
   itemType: 1
