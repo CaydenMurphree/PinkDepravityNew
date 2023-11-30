@@ -2024,6 +2024,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d4fa27a1fda28544c8105e84cbd18433, type: 3}
   m_PrefabInstance: {fileID: 1156657436}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &524015094 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3199561281040735087, guid: bd71e261404543f47b97bb8e1758dd78, type: 3}
+  m_PrefabInstance: {fileID: 6006368530106605625}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &548120097
 GameObject:
   m_ObjectHideFlags: 0
@@ -5997,6 +6002,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2059695236}
   m_CullTransparentMesh: 1
+--- !u!1 &2074211520 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4004418776537942132, guid: bd71e261404543f47b97bb8e1758dd78, type: 3}
+  m_PrefabInstance: {fileID: 6006368530106605625}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2091595063
 GameObject:
   m_ObjectHideFlags: 0
@@ -7016,6 +7026,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1590306542}
     - target: {fileID: 8904447049192003856, guid: bd71e261404543f47b97bb8e1758dd78, type: 3}
+      propertyPath: horseSkin
+      value: 
+      objectReference: {fileID: 2074211520}
+    - target: {fileID: 8904447049192003856, guid: bd71e261404543f47b97bb8e1758dd78, type: 3}
       propertyPath: deathSound
       value: 
       objectReference: {fileID: 923271528}
@@ -7023,6 +7037,10 @@ PrefabInstance:
       propertyPath: playerTran
       value: 
       objectReference: {fileID: 24595137}
+    - target: {fileID: 8904447049192003856, guid: bd71e261404543f47b97bb8e1758dd78, type: 3}
+      propertyPath: soldierSkin
+      value: 
+      objectReference: {fileID: 524015094}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
